@@ -1,5 +1,5 @@
 FROM node:19.5.0-alpine
-WORKDIR /usr/src/app
+WORKDIR /var/lib/jenkins/workspace/pipleine
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
