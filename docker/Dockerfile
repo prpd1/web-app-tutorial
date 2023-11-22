@@ -1,5 +1,5 @@
 FROM node:18
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/web-app-tutorial
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
