@@ -1,33 +1,16 @@
 pipeline {
-  agent any
-    tools {
-      maven 'maven'
-                 jdk 'JDK'
-    }
-    stages {      
-        stage('Build maven ') {
-            steps { 
-                    sh 'pwd'      
-                    sh 'mvn  clean install package'
+    agent any
+    stages {
+        stage('Build image') {
+            steps {
+                echo 'Starting to build docker image'
+
+                script {
+                    def customImage = docker.build('qwerty703/qwerty',".Dockerfile")
+                    docker.withRegistry('https://registry.hub.docker.com', 'qwerty703') {
+                    customImage.push("${env.BUILD_NUMBER}")
+                }
             }
         }
-        
-        stage('Copy Artifact') {
-           steps { 
-                   sh 'pwd'
-		   sh 'cp -r target/*.jar docker'
-           }
-        }
-         
-        stage('Build docker image') {
-           steps {
-               script {         
-                 def customImage = docker.build('qwerty703/hello', "./docker")
-                 docker.withRegistry('https://registry.hub.docker.com', 'qwerty703') {
-                 customImage.push("${env.BUILD_NUMBER}")
-                 }                     
-           }
-        }
-	  }
     }
 }
