@@ -1,4 +1,4 @@
-FROM node:19.5.0-alpine
+FROM node:18
 WORKDIR /usr/src/app
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
